@@ -9,7 +9,8 @@ Select version(), cuRrent_date(), noW() from dual;
 select version(),
 now()
 from dual;
-
+select version(),now()
+from dual;
 -- table 생성 : DML
 create table pet (
 	name varchar(100),
