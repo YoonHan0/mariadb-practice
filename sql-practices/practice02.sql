@@ -11,10 +11,14 @@ FROM salaries;
 SELECT date_format(max(hire_date), '%Y년%m월%d일') AS '마지막 입사일'
 FROM employees;
 
--- 문제3. XXX
+-- 문제3.
 -- 가장 오래 근속한 직원의 입사일은 언제인가요? 다음 형식으로 출력해주세요.
 -- 예) 2014년 07월 10일
 SELECT max(period_diff(date_format(curdate(), '%Y년%m월%d일'), date_format(hire_date, '%Y년%m월%d일'))) AS Month, date_format(hire_date, '%Y년%m월%d일')
+FROM employees;
+
+-- 이거인가..?
+SELECT date_format(min(hire_date), '%Y년%m월%d일') AS 입사일
 FROM employees;
 
 -- 문제4.
@@ -22,10 +26,11 @@ FROM employees;
 SELECT avg(salary) AS '평균 연봉'
 FROM salaries;
 
--- 문제5. - 1번과 같은 문제 아닌가..?
+-- 문제5.
 -- 현재 이 회사의 최고/최저 연봉은 얼마입니까?
-SELECT max(salary) AS '최고임금', min(salary) AS '최저임금'
-FROM salaries;
+SELECT max(salary) AS '현재 최고 연봉', min(salary) AS '현재 최저 연봉'
+FROM salaries
+WHERE to_date = '9999-01-01';
 
 -- 문제6.
 -- 최고 어린 사원의 나이와 최 연장자의 나이는?
