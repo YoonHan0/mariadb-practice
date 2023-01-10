@@ -58,10 +58,10 @@ ORDER BY avg_salary DESC;
 
 -- 실습문제1
 -- 현재 직원별 근무 부서를 사번, 지원 이름, 근무 부서명을 출력하시오. / 부서명이 Customer Service밖에 안 나옴..
-SELECT a.emp_no, a.first_name, d.dept_name
+SELECT a.emp_no, a.first_name, c.dept_name
 FROM employees a 
-JOIN dept_manager b ON a.emp_no = b.emp_no,
-dept_manager c JOIN departments d ON c.dept_no = d.dept_no
+JOIN dept_manager b ON a.emp_no = b.emp_no
+JOIN departments c ON b.dept_no = c.dept_no
 WHERE b.to_date = '9999-01-01'
 GROUP BY a.emp_no;
 
@@ -86,10 +86,10 @@ HAVING count(a.emp_no) >= 100;
 -- 실습문제4
 -- 현재 부서별로 직책이 Engineer인 직원들에 대해서만 평균 급여를 구하시오.
 -- 부서 이름, 평균 급여 순으로 출력
-SELECT a.dept_name, avg(d.salary)		-- 이건 왜 안될까.. (시간초과)
-FROM departments a JOIN dept_emp b ON a.dept_no = b.dept_no,
-	dept_emp e JOIN titles c ON e.emp_no = c.emp_no,
-    dept_emp f JOIN salaries d ON f.emp_no = d.emp_no
+SELECT a.dept_name, avg(d.salary)		-- 이건 왜 안될까.. (시간초과) -> 문법 오류였다~
+FROM departments a JOIN dept_emp b ON a.dept_no = b.dept_no
+	JOIN titles c ON b.emp_no = c.emp_no
+    JOIN salaries d ON c.emp_no = d.emp_no
 WHERE c.title = 'Engineer'
 	AND b.to_date = '9999-01-01'
     AND c.to_date = '9999-01-01'
