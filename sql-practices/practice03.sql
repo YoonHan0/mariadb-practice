@@ -19,13 +19,15 @@ ORDER BY a.first_name ASC;
 
 -- 문제3.
 -- 전체 사원의 사번, 이름, 현재 부서를 이름 순서로 출력하세요..
-SELECT a.emp_no, a.first_name, c.dept_name
+SELECT a.emp_no, concat(a.first_name, ' ', a.last_name), c.dept_name
 FROM employees a 
-JOIN dept_manager b ON a.emp_no = b.emp_no
-JOIN departments c ON b.dept_no = c.dept_no 
+JOIN dept_emp b ON a.emp_no = b.emp_no
+JOIN departments c ON b.dept_no = c.dept_no
 WHERE b.to_date = '9999-01-01'
 ORDER BY a.first_name ASC;
 
+SELECT *
+FROM departments;
 -- 문제4.
 -- 전체 사원의 사번, 이름, 연봉, 직책, 부서를 모두 이름 순서로 출력합니다.
 SELECT a.emp_no, a.first_name, d.salary, e.title, c.dept_name
