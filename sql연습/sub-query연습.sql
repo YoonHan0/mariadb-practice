@@ -12,9 +12,8 @@ SELECT a.n, a.s, a.r
 FROM (SELECT now() AS n, sysdate() AS s, 3 + 1 AS r FROM DUAL) a;
 
 --
--- 3) WHERE절의 서브쿼리
+-- 3) WHERE(HAVING)절의 서브쿼리
 -- 
-
 -- 예제) 현재 Fai Bale이 근무하는 부서에서 근무하는 다른 직원의 사번, 전체 이름을 출력해보세요. 
 SELECT b.dept_no
 FROM employees a, dept_emp b
@@ -100,4 +99,55 @@ GROUP BY b.title
 ORDER BY avg(a.salary) ASC
 	LIMIT 0, 1;
 
--- 3-2) 복수행 연산자 : 
+-- 3-2) 복수행 연산자 : in, not in, 비교연산자 any, 비교연산자 all
+
+-- any 사용법
+-- 1. =any : in
+-- 2. >any, >=any : 최소값
+-- 3. <any, <=any : 최대값
+-- 4. <>any, !=any : not in
+
+-- all 사용법
+-- 1. =all : (X)
+-- 2. >all, >=all : 최대값
+-- 3. <all, <=all : 최소값
+-- 4. <>all, !=all
+
+-- 실습문제3
+-- 현재 급여가 5000 이상인 이름과 급여를 출력하시오.
+
+-- solution1) JOIN
+SELECT a.first_name, b.salary
+FROM employees a JOIN salaries b ON a.emp_no = b.emp_no
+WHERE b.to_date = '9999-01-01'
+	AND b.salary >= 50000
+ORDER BY b.salary ASC;
+
+-- solution2) Sub Query
+SELECT emp_no, salary
+FROM salaries
+WHERE to_date = '9999-01-01'
+	AND salary >= 50000;
+    
+SELECT a.first_name, b.salary
+FROM employees a JOIN salaries b ON a.emp_no = b.emp_no
+WHERE b.to_date = '9999-01-01'
+	AND (a.emp_no, b.salary) in (SELECT emp_no, salary
+								FROM salaries
+								WHERE to_date = '9999-01-01'
+									AND salary >= 50000)
+ORDER BY b.salary ASC;
+
+-- 실습4
+-- 현재 각 부서별로 최고 많은 급여를 받고 있는 직원의 이름과 월급을 출력
+SELECT a.dept_no, max(b.salary) AS max_salary
+FROM dept_emp a 
+JOIN salaries b ON a.emp_no = b.emp_no
+WHERE a.to_date = '9999-01-01'
+	AND b.to_date = '9999-01-01'
+GROUP BY a.dept_no;
+
+-- 4-1) WHERE절 subquery(in)
+
+
+-- 4-2) FROM절
