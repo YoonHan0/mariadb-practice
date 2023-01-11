@@ -148,6 +148,32 @@ WHERE a.to_date = '9999-01-01'
 GROUP BY a.dept_no;
 
 -- 4-1) WHERE절 subquery(in)
-
-
+SELECT a.dept_name, c.first_name, d.salary
+FROM departments a, dept_emp b, employees c, salaries d
+WHERE a.dept_no = b.dept_no
+    AND b.emp_no = c.emp_no
+    AND c.emp_no = d.emp_no
+    AND b.to_date = '9999-01-01'
+    AND d.to_date = '9999-01-01'
+    AND (a.dept_no, d.salary) IN (  SELECT a.dept_no, max(b.salary)
+                                      FROM dept_emp a, salaries b
+                                     WHERE a.emp_no = b.emp_no
+                                       AND a.to_date = '9999-01-01'
+                                       AND b.to_date = '9999-01-01'
+                                  GROUP BY a.dept_no);
 -- 4-2) FROM절
+SELECT depart.dept_name, e.first_name, sub.max_salary
+FROM  (SELECT a.dept_no, max(b.salary) AS max_salary
+		FROM dept_emp a 
+		JOIN salaries b ON a.emp_no = b.emp_no
+		WHERE a.to_date = '9999-01-01'
+			AND b.to_date = '9999-01-01'
+		GROUP BY a.dept_no) sub 
+JOIN departments depart ON sub.dept_no = depart.dept_no
+JOIN dept_emp de ON depart.dept_no = de.dept_no
+JOIN employees e ON de.emp_no = e.emp_no
+JOIN salaries s ON e.emp_no = s.emp_no 
+WHERE de.to_date = '9999-01-01'
+	AND s.to_date = '9999-01-01'
+    ANd s.salary = sub.max_salary;
+    
