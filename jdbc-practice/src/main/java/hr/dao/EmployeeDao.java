@@ -11,6 +11,14 @@ import java.util.List;
 import hr.vo.EmployeeVo;
 
 public class EmployeeDao {
+	public List<EmployeeVo> findBySalary(int minSalary, int maxSalary) {
+		List<EmployeeVo> result = new ArrayList<>();
+		
+		return result;
+		
+		
+	}
+	
 	public List<EmployeeVo> findByName(String keyword) {
 		List<EmployeeVo> result = new ArrayList<>();
 		

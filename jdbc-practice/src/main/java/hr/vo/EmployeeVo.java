@@ -5,10 +5,17 @@ public class EmployeeVo {
 	private String birthDate;
 	private String firstName;
 	private String lastName;
+	private int salary;
+	public int getSalary() {
+		return salary;
+	}
+	public void setSalary(int salary) {
+		this.salary = salary;
+	}
 	@Override
 	public String toString() {
 		return "EmployeeVo [no=" + no + ", birthDate=" + birthDate + ", firstName=" + firstName + ", lastName="
-				+ lastName + ", gender=" + gender + ", hireDate=" + hireDate + "]";
+				+ lastName + ", salary=" + salary + ", gender=" + gender + ", hireDate=" + hireDate + "]";
 	}
 	private String gender;
 	private String hireDate;
