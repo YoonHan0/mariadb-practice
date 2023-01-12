@@ -61,10 +61,41 @@ public class BookShopDao {
 		return result;
 	}
 
-	public List<BookShopVo> update(BookShopVo vo) {
-		List<BookShopVo> result = new ArrayList<>();
+	public void update(BookShopVo vo) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
 		
-		return result;
+		try {
+			conn = getConnection();
+			
+			String sql = "INSERT INTO book(no, title, author_no)"
+						+ " VALUES(null, ?, ?)";
+//			UPDATE book
+//			SET title = "update_title", rent = "y"
+//			WHERE no = 5;
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, vo.getTitle());
+			pstmt.setString(2, vo.getAuthor());
+			
+			pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			System.out.println("error:" + e);
+		} finally {
+			try {
+				if(pstmt != null) {
+					pstmt.close();
+				}
+				
+				if(conn != null) {
+					conn.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 	
 	
