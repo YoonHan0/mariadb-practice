@@ -1,5 +1,6 @@
 package emaillist.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import emaillist.vo.EmaillistVo;
@@ -7,8 +8,8 @@ import emaillist.vo.EmaillistVo;
 public class EmaillistDao {
 
 	public List<EmaillistVo> findAll() {
-		
-		return null;
+		List<EmaillistVo> result = new ArrayList<>();
+		return result;
 	}
 
 }
