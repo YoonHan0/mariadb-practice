@@ -1,5 +1,8 @@
 package bookshop.dao.test;
 
+import bookshop.dao.BookShopDao;
+import bookshop.vo.BookShopVo;
+
 public class BookDaoTest {
 
 	public static void main(String[] args) {
@@ -7,12 +10,12 @@ public class BookDaoTest {
 	}
 
 	private static void testInsert() {
-		BookVo vo = null;
-		BookDao dao = new BookDao();
+		BookShopVo vo = null;
+		BookShopDao dao = new BookShopDao();
 		
-		vo = new BookVo();
-		vo.setTite("");
-		vo.setAuthorNo();
+		vo = new BookShopVo();
+		vo.setTitle("title_test02");
+		vo.setAuthor("2");
 		dao.insert(vo);
 		
 	}

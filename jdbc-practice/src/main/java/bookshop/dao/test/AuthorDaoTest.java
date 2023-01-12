@@ -1,15 +1,20 @@
 package bookshop.dao.test;
 
+import java.util.List;
+
+import bookshop.dao.AuthorDao;
+import bookshop.vo.AuthorVo;
+
 public class AuthorDaoTest {
 
 	public static void main(String[] args) {
-		// testInsert();
+		testInsert();
 		testFindAll();
 	}
 
 	private static void testInsert() {
 		AuthorVo vo = null;
-		AythorDao dao = new AuthorDao();
+		AuthorDao dao = new AuthorDao();
 		
 		vo = new AuthorVo();
 		vo.setName("스테파니메이어");
@@ -42,7 +47,7 @@ public class AuthorDaoTest {
 
 	private static void testFindAll() {
 		List<AuthorVo> list = new AuthorDao().findAll();
-		for(AuthroVo vo : list) {
+		for(AuthorVo vo : list) {
 			System.out.println(vo);
 		}
 	}

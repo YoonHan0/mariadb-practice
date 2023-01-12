@@ -1,6 +1,11 @@
 package bookshop.main;
 
+import java.util.List;
 import java.util.Scanner;
+
+import bookshop.dao.BookShopDao;
+import bookshop.vo.BookShopVo;
+
 
 public class BookShop {
 
@@ -12,16 +17,21 @@ public class BookShop {
 		Long no = scanner.nextLong();
 		scanner.close();
 		
-		BookVo vo = new BookVo();
-		vo.setNo(no);
-		vo.setRent("Y");
+		BookShopVo vo = new BookShopVo();
+		vo.setBookNo(no);
+		vo.setStateCode("Y");
 		
-		new BookDao().update(vo);
+		 new BookShopDao().update(vo);
 		
 		displayBookInfo();
 	}
 
+	/* Read */
 	private static void displayBookInfo() {
-		List<BookVo> list = new BookDao().findAll();
+		List<BookShopVo> list = new BookShopDao().findAll();
+		
+		for(BookShopVo book : list) {
+			book.print();
+		}
 	}
 }
