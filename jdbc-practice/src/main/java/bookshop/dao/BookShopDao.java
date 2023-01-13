@@ -22,7 +22,7 @@ public class BookShopDao {
 		try {
 			conn = getConnection();
 			
-			String sql ="select a.title, b.name, a.rent" 
+			String sql ="select a.no, a.title, b.name, a.rent" 
 					+ " from book a"
 					+ " JOIN author b ON a.author_no = b.no"
 					+ " order by a.no desc";
@@ -31,9 +31,10 @@ public class BookShopDao {
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				BookShopVo vo = new BookShopVo();
-				vo.setTitle(rs.getString(1));
-				vo.setAuthor(rs.getString(2));
-				vo.setStateCode(rs.getString(3));
+				vo.setBookNo(rs.getLong(1));
+				vo.setTitle(rs.getString(2));
+				vo.setAuthor(rs.getString(3));
+				vo.setStateCode(rs.getString(4));
 				
 				result.add(vo);
 			}
@@ -68,18 +69,17 @@ public class BookShopDao {
 		try {
 			conn = getConnection();
 			
-			String sql = "INSERT INTO book(no, title, author_no)"
-						+ " VALUES(null, ?, ?)";
-//			UPDATE book
-//			SET title = "update_title", rent = "y"
-//			WHERE no = 5;
+			String sql = "UPDATE book" +
+						" SET rent = ?" +
+						" WHERE no = ?";
 			
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setString(1, vo.getTitle());
-			pstmt.setString(2, vo.getAuthor());
+			pstmt.setString(1, vo.getStateCode());
+			pstmt.setLong(2, vo.getBookNo());
 			
 			pstmt.executeUpdate();
+			
 			
 		} catch (SQLException e) {
 			System.out.println("error:" + e);

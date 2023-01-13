@@ -44,6 +44,10 @@ public class BookShopVo {
 	}
 
 	public void print() {
-		System.out.println("책 제목:" + title + ", 작가:" + author + ", 대여 유무:" + (stateCode == "n" ? "재고있음" : "대여중"));
+		String check = "재고있음";
+		if(stateCode.equals("y")) {
+			check = "대여중";
+		}
+		System.out.println(bookNo + ". " + "책 제목:" + title + ", 작가:" + author + ", 대여 유무:" +  check);
 	}
 }

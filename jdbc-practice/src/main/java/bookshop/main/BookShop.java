@@ -19,9 +19,9 @@ public class BookShop {
 		
 		BookShopVo vo = new BookShopVo();
 		vo.setBookNo(no);
-		vo.setStateCode("Y");
-//		
-		 new BookShopDao().update(vo);
+		vo.setStateCode("y");
+		
+		new BookShopDao().update(vo);
 		
 		displayBookInfo();
 	}

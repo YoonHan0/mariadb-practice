@@ -9,7 +9,10 @@ FROM book;
 SELECT *
 FROM book;
 
-INSERT INTO book(no, title, author_no) VALUE(null, "title_test01", 2);
+SELECT *
+FROM author;
+
+INSERT INTO book(no, title, author_no) VALUE(null, "title_test03", 3);
 
 INSERT INTO author VALUE(null, "또치");
 SELECT *
@@ -24,7 +27,11 @@ FROM book
 WHERE no = 1;
 
 
-select a.title, b.name, a.rent
+select a.no, a.title, b.name, a.rent
 from book a
 JOIN author b ON a.author_no = b.no
 order by a.no desc;
+
+UPDATE book
+SET title = "update_title02", rent = "n"
+WHERE no = 5;
