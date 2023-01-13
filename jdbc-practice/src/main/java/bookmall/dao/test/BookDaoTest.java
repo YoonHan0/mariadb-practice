@@ -15,25 +15,19 @@ public class BookDaoTest {
 		vo = new BookVo();
 		vo.setBookTitle("소설01");
 		vo.setBookPrice(2000);
-		vo.setCategory_no(7);
-		dao.insert(vo);
-		
-		vo = new BookVo();
-		vo.setBookTitle("소설01");
-		vo.setBookPrice(2000);
-		vo.setCategory_no(7);
+		vo.setCategory_no(1);
 		dao.insert(vo);
 		
 		vo = new BookVo();
 		vo.setBookTitle("IT01");
 		vo.setBookPrice(3000);
-		vo.setCategory_no(8);
+		vo.setCategory_no(2);
 		dao.insert(vo);
 		
 		vo = new BookVo();
 		vo.setBookTitle("예술01");
 		vo.setBookPrice(5000);
-		vo.setCategory_no(9);
+		vo.setCategory_no(3);
 		dao.insert(vo);
 	}
 }

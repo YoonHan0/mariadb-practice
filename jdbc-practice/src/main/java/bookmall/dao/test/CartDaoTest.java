@@ -16,9 +16,14 @@ public class CartDaoTest {
 		vo = new CartVo();
 		vo.setCount(2);
 		vo.setUser_no(1);
-		vo.setBook_no(4);
+		vo.setBook_no(2);
 		dao.insert(vo);
 		
+		vo = new CartVo();
+		vo.setCount(3);
+		vo.setUser_no(2);
+		vo.setBook_no(3);
+		dao.insert(vo);
 	}
 
 }

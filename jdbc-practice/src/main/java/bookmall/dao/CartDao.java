@@ -11,6 +11,54 @@ import java.util.List;
 import bookmall.vo.CartVo;
 
 public class CartDao {
+	
+	public int findPrice(int user_no) {
+		int result = 0;
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			conn = getConnection();
+			
+			String sql =
+					"SELECT sum(a.count*b.price)"
+					+ " FROM cart a"
+					+ " JOIN book b ON a.book_no = b.no"
+					+ " GROUP BY a.user_no"
+					+ " HAVING a.user_no = ?";
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setInt(1, user_no);
+			
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				result = rs.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("error:" + e);
+		} finally {
+			try {
+				if(rs != null) {
+					rs.close();
+				}
+				
+				if(pstmt != null) {
+					pstmt.close();
+				}
+				
+				if(conn != null) {
+					conn.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return result;
+	}
+	
 	public List<CartVo> findAll() {
 		List<CartVo> result = new ArrayList<>();
 		
@@ -96,6 +144,8 @@ public class CartDao {
 		}
 	}
 	
+	
+	
 	private Connection getConnection() throws SQLException {
 		Connection conn = null;
 		
@@ -109,5 +159,8 @@ public class CartDao {
 		
 		return conn;
 	}
+
+	
+	
 
 }

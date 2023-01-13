@@ -15,18 +15,20 @@ public class OrdersDao {
 	public void insert(OrdersVo vo) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		
+		CartDao findDao = new CartDao();
+
 		try {
 			conn = getConnection();
 			
 			String sql = 
-					"INSERT INTO orders(no, order_no, destination, user_no)" +
-					" VALUES(null, ?, ?, ?);";
+					"INSERT INTO orders(no, order_no, destination, price, user_no)" +
+					" VALUES(null, ?, ?, ?, ?);";
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setInt(1, vo.getOrdersNumber());
 			pstmt.setString(2, vo.getDestination());
-			pstmt.setInt(3, vo.getUserNo());
+			pstmt.setInt(3, findDao.findPrice(vo.getOrdersNumber()));
+			pstmt.setInt(4, vo.getUserNo());
 			
 			pstmt.executeUpdate();
 			

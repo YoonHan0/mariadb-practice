@@ -4,8 +4,16 @@ public class OrdersVo {
 	private Long ordersNo;
 	private int ordersNumber;
 	private String destination;
+	private int price;
 	private int userNo;
 	private String userName;
+	
+	public int getPrice() {
+		return price;
+	}
+	public void setPrice(int price) {
+		this.price = price;
+	}
 	
 	public String getUserName() {
 		return userName;
