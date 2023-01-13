@@ -7,7 +7,7 @@ FROM cart;
 SELECT *
 FROM user;
 SELECT *
-FROM book;
+FROM orders;
 
 SELECT no, name, phone, email, password
 FROM user;
@@ -114,3 +114,28 @@ JOIN book b ON a.book_no = b.no
 GROUP BY a.user_no
 HAVING a.user_no = 1;
 
+DESC order_book;
+SELECT * FROM order_book;
+SELECT * FROM book;
+SELECT * FROM cart;
+UPDATE cart
+SET book_no = 1
+WHERE no = 1;
+
+INSERT INTO order_book(no, count, book_no, orders_no)
+VALUES(null, 0, 1, 2);
+
+DELETE
+FROM order_book;
+
+SELECT count
+FROM cart
+WHERE book_no = (SELECT b.no
+				FROM order_book a
+				JOIN book b ON a.book_no = b.no
+				WHERE a.book_no = b.no);
+
+SELECT b.no
+FROM order_book a
+JOIN book b ON a.book_no = b.no
+WHERE a.book_no = b.no;
