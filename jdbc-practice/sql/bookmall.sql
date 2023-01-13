@@ -77,7 +77,8 @@ JOIN cart b ON a.no = b.user_no;
 SELECT a.user_no, sum(a.count*b.price)
 FROM cart a
 JOIN book b ON a.book_no = b.no
-GROUP BY a.user_no;
+GROUP BY a.user_no
+HAVING a.user_no = 1;
 
 -- order_book
 DESC order_book;
@@ -85,7 +86,31 @@ SELECT * FROM order_book;
 
 SELECT *
 FROM order_book a
-JOIN orders b ON a.orders_no = b.no
+JOIN orders b ON a.orders_no = b.no;
 
-INSERT INTO orders(no, order_no, destination, user_no)
+INSERT INTO order_book(no, order_no, destination, user_no)
 VALUES(null, 1, "부산 덕천동", 1);
+
+-- JOIN을 이용해서 UPDATE 하는 방법
+-- update book a
+-- join category b on a.category_no = b.no
+-- set a.title = b.type
+-- where b.no = 7;
+
+INSERT INTO orders(no, order_no, destination, price, user_no)
+VALUES(null, 1, "부산 덕천동", (SELECT sum(a.count*b.price)
+							FROM cart a
+							JOIN book b ON a.book_no = b.no
+							GROUP BY a.user_no
+							HAVING a.user_no = 1),1);
+DELETE
+FROM orders;
+SELECT *
+FROM orders;
+
+SELECT sum(a.count*b.price)
+FROM cart a
+JOIN book b ON a.book_no = b.no
+GROUP BY a.user_no
+HAVING a.user_no = 1;
+
