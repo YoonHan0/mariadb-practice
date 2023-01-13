@@ -17,14 +17,14 @@ public class OrderBookDaoTest {
 		
 		vo = new OrderBookVo();
 		vo.setCount(0);
-		vo.setBookNumber(0);
-		vo.setOrderNumber(0);
+		vo.setBookNumber(1);
+		vo.setOrderNumber(1);
+		dao.insert(vo);
 		
 		vo = new OrderBookVo();
-		vo.setOrdersNumber(2);
-		vo.setDestination("울산 삼산동");
-		vo.setPrice(0);
-		vo.setUserNo(2);
+		vo.setCount(0);
+		vo.setBookNumber(2);
+		vo.setOrderNumber(2);
 		dao.insert(vo);
 		
 	}

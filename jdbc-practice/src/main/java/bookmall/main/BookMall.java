@@ -5,11 +5,13 @@ import java.util.List;
 import bookmall.dao.BookDao;
 import bookmall.dao.CartDao;
 import bookmall.dao.CategoryDao;
+import bookmall.dao.OrderBookDao;
 import bookmall.dao.OrdersDao;
 import bookmall.dao.UserDao;
 import bookmall.vo.BookVo;
 import bookmall.vo.CartVo;
 import bookmall.vo.CategoryVo;
+import bookmall.vo.OrderBookVo;
 import bookmall.vo.OrdersVo;
 import bookmall.vo.UserVo;
 
@@ -42,16 +44,34 @@ public class BookMall {
 		System.out.print("\n");
 		
 		System.out.println("\n ## 주문 도서 리스트 ## ");
-//		displayOrderBookInfo();
-//		System.out.print("\n");
+		testOrderBookInsert();
+		displayOrderBookInfo();
+		System.out.print("\n");
 	}
 
 	private static void displayOrderBookInfo() {
-		List<OrdersVo> list = new OrdersDao().findOrderBookAll();
+		List<OrderBookVo> list = new OrderBookDao().findAll();
 
-		for (OrdersVo order : list) {
-			order.print();
+		for (OrderBookVo orderBook : list) {
+			orderBook.print();
 		}		
+	}
+	private static void testOrderBookInsert() {
+		OrderBookVo vo = null;
+		OrderBookDao dao = new OrderBookDao();
+		
+		vo = new OrderBookVo();
+		vo.setCount(0);
+		vo.setBookNumber(2);
+		vo.setOrderNumber(1);
+		dao.insert(vo);
+		
+		vo = new OrderBookVo();
+		vo.setCount(0);
+		vo.setBookNumber(3);
+		vo.setOrderNumber(2);
+		dao.insert(vo);
+		
 	}
 	private static void displayOrderInfo() {
 		List<OrdersVo> list = new OrdersDao().findAll();
