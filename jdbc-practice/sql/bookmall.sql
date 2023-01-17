@@ -135,7 +135,24 @@ WHERE book_no = (SELECT b.no
 				JOIN book b ON a.book_no = b.no
 				WHERE a.book_no = b.no);
 
+select b.no, b.title, o.count
+from order_book o join book b
+on o.book_no = b.no;
+
+select * from order_book;
+
 SELECT b.no
 FROM order_book a
 JOIN book b ON a.book_no = b.no
 WHERE a.book_no = b.no;
+
+SELECT a.no, b.title, c.count
+FROM (SELECT b.no
+		FROM order_book a
+		JOIN book b ON a.book_no = b.no
+		WHERE a.book_no = b.no) a
+JOIN book b ON a.no = b.no
+JOIN cart c ON a.no = c.no
+WHERE a.no = b.no
+	ANd a.no = c.no;
+

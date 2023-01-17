@@ -66,7 +66,7 @@ public class UserDao {
 		
 		try {
 			Class.forName("org.mariadb.jdbc.Driver");
-			String url = "jdbc:mariadb://192.168.10.120:3307/bookmall?charset=utf8";
+			String url = "jdbc:mariadb://"+IpPort.IP+":"+IpPort.PORT+"/bookmall?charset=utf8";
 			conn = DriverManager.getConnection(url, "bookmall", "bookmall");
 		} catch (ClassNotFoundException e) {
 			System.out.println("드라이버 로딩 실패:" + e);

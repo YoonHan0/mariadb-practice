@@ -1,5 +1,5 @@
 -- bookshop
-SHOW tables;
+
 DESC book;
 DESC author;
 
@@ -32,18 +32,6 @@ from book a
 JOIN author b ON a.author_no = b.no
 order by a.no desc;
 
--- UPDATE book
--- SET title = "소설01"
--- WHERE no = 4;
-
--- SELECT *
--- FROM book;
-
--- SELECT *
--- FROM category;
-
--- JOIN을 이용해서 UPDATE 하는 방법
-update book a
-join category b on a.category_no = b.no
-set a.title = b.type
-where b.no = 7;
+UPDATE book
+SET title = "파란머리앤", rent = "n"
+WHERE no = 6;
