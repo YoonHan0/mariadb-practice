@@ -17,3 +17,5 @@ DESC guestbook;
 INSERT INTO guestbook VALUE(null, '윤한영', '1234', '안녕하세요~', now());
 
 SELECT * FROM guestbook;
+DESC user;
+SELECT * FROM user;
